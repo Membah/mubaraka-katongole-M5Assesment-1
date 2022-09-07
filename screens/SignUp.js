@@ -1,61 +1,84 @@
-import  React from 'react'
-import { StyleSheet, Text, View, TextInput,TouchableOpacity, Dimensions,SafeAreaView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import  React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput,TouchableOpacity,Dimensions,SafeAreaView } from 'react-native';
+import { registration } from './Backend/Authentication';
 
-const Login = ({navigation}) => {
 
+
+
+
+const SignUp = ({navigation}) => {
+
+const [name,setName] = useState('')
 const [email,setEmail] = useState('')
 const [password,setPassword] = useState('')
+
+const SignUp = () =>{
+  registration(email,password,name)
+}
   return (
 
     <SafeAreaView style={styles.container}>
       
-      <Text style={styles.welcome}> Welcome Back </Text>
-     <Text style={{marginBottom:10,fontSize:18,color: "#fff"}}>  Sign in to continue  </Text>
+     <Text style={styles.welcome}> SignUp Here</Text>
      <TextInput
      style = {styles.input}
-     placeholder=" Enter Your Email"
+     placeholder=" Enter Your Name"
+     value={name}
+     name = 'name'
+     onChangeText={(name) =>{setName(name)}}
+     />
+     
+     <TextInput
+     style = {styles.input}
+     placeholder="Enter Your Email"
      value={email}
      name = 'email'
      onChangeText={(email) =>{setEmail(email)}}
-     
      />
-      <TextInput
+     <TextInput
      style = {styles.input}
-     placeholder="Enter Your Password"
+     underlineColorAndroid='rgba(0,0,0,0)'
+     placeholder="Enter Password"
      secureTextEntry={true}
      value={password}
      name = 'password'
      onChangeText={(password) =>{setPassword(password)}}
      />
-    <View style={styles.btnContainer}>
+      <TextInput
+      underlineColorAndroid='rgba(0,0,0,0)'
+     style = {styles.input}
+     placeholder="Confirm Password"
+     secureTextEntry={true}
+     value={password}
+     name = 'password'
+     onChangeText={(password) =>{setPassword(password)}}
+     />
+     <View style={styles.btnContainer}>
      <TouchableOpacity style={styles.userBtn} onPress ={() => navigation.navigate('Home')}>
         <Text style={styles.btnTxt}>
-            Login
+            SignUp
         </Text>
      </TouchableOpacity >
-     <TouchableOpacity style={styles.userBtn} onPress ={() => navigation.navigate('SignUp')}>
+     <TouchableOpacity style={styles.userBtn} onPress ={() => navigation.navigate('Login')}>
      <Text style={styles.btnTxt}>
-     You don't have an account? Register Here
+     If you have an account? Login
      </Text>
      </TouchableOpacity>
      </View>
     </SafeAreaView>
- 
-  ); 
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00b8d4',
+    backgroundColor: '#E040FB',
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
   welcome: {
     fontSize: 30,
+    backgroundColor: '#E040FB',
     color: "#fff",
     margin:10,
     textAlign: 'center',
@@ -73,18 +96,17 @@ const styles = StyleSheet.create({
    width:"90%"
    },
    userBtn: {
-    backgroundColor:"#d500f9",
+    backgroundColor:"#9C27B0",
      padding:15,
      width:"45%",
-     margin:15,
+     margin:5,
      borderRadius:10
     },
     btnTxt: {
         fontSize: 15,
         textAlign:"center",
-        fontWeight:'bold'
-        
+        fontWeight: "bold"
         },
 });
 
-export default Login;
+export default SignUp
